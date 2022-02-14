@@ -1,8 +1,9 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-android'
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -40,6 +41,7 @@ android {
 dependencies {
     def nav_version = "2.4.1"
     def version_retrofit = "2.9.0"
+    def version_moshi = "1.13.0"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -63,7 +65,10 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
     implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
 
+    implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+
     // moshi
-    implementation "com.squareup.moshi:moshi:1.13.0"
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.13.0'
+    implementation "com.squareup.moshi:moshi:$version_moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
+
 }
