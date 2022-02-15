@@ -17,6 +17,10 @@
 
 package com.example.android.marsrealestate.overview
 
+import android.content.ContentValues.TAG
+import android.util.Log
+import android.util.Log.DEBUG
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,6 +31,9 @@ import com.example.android.marsrealestate.network.MarsProperty
 //import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
+import javax.security.auth.callback.Callback
 
 enum class MarsApiStatus { LOADING, ERROR, DONE }
 /**
@@ -50,10 +57,10 @@ class OverviewViewModel : ViewModel() {
         get() = _properties
 
     // Internally, we use a MutableLiveData to handle navigation to the selected property
-    private val _navigateToSelectedProperty = MutableLiveData<MarsProperty>()
+    private val _navigateToSelectedProperty = MutableLiveData<MarsProperty?>()
 
     // The external immutable LiveData for the navigation property
-    val navigateToSelectedProperty: LiveData<MarsProperty>
+    val navigateToSelectedProperty: LiveData<MarsProperty?>
         get() = _navigateToSelectedProperty
 
 
@@ -79,6 +86,7 @@ class OverviewViewModel : ViewModel() {
                 _status.value = MarsApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = MarsApiStatus.ERROR
+                Log.d(TAG, "getMarsRealEstateProperties: $e")
                 _properties.value = ArrayList()
             }
         }

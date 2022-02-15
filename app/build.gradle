@@ -4,13 +4,14 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
+    id "org.jetbrains.kotlin.kapt"
 }
 
 android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.diceroller"
+        applicationId "com.example.marsrealestate"
         minSdk 29
         targetSdk 32
         versionCode 1
